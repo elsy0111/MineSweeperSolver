@@ -1,16 +1,20 @@
 import pyautogui as pgui
 from PIL import Image
+from time import sleep
+from pynput.mouse import Controller, Button
 
 image_path = 'img/corner.png'
 div = 32
-SIZE = 39
+SIZE_W = 48
+SIZE_H = 39
+
+mouse = Controller()
 
 def pos_origin():
     location = pgui.locateOnScreen(image_path)
     if location:
         cx, cy = location[0], location[1]
-        ox, oy = cx + div * 2 - 4, cy + div * 2 - 6 
-        pgui.moveTo(ox, oy)
+        ox, oy = cx + div * 2 - 3, cy + div * 2 - 5 
     else:
         ox = oy = -1
     return (ox, oy)
@@ -18,17 +22,20 @@ def pos_origin():
 ox, oy = pos_origin()
 
 def click(j, i, left = 1):
-    # ox, oy = pos_origin()
-    if ox != -1:
-        pgui.moveTo(ox + i * div, oy + j * div)
-        if left:
-            print("dig  :", i, j)
-            pgui.leftClick()
-        else:
-            print("flag :", i, j)
-            pgui.rightClick()
+    if left:
+        print("dig  :", i, j)
+        # pgui.click(ox + i * div, oy + j * div)
+        mouse.position = (ox + i * div, oy + j * div)
+        sleep(.02)
+        mouse.click(Button.left, 1)
+        sleep(.02)
     else:
-        print("Window Not Found(on click)")
+        print("flag :", i, j)
+        # pgui.click(ox + i * div, oy + j * div, button="right")
+        mouse.position = (ox + i * div, oy + j * div)
+        sleep(.02)
+        mouse.click(Button.right, 1)
+        sleep(.02)
 
 def cell(v):
     if   v == (  0,   0, 255):
@@ -46,24 +53,40 @@ def cell(v):
     elif v == (174, 189, 223):
         return 0
     elif v == (  0,   0,   0):
-        return 9
+        return 0
     elif v == (128,   0, 128):
         return 6
 
-def get_map():
+dead_img = "img/dead.png"
+
+def is_arrive():
+    dead  = pgui.locateOnScreen(dead_img)
+    if dead:
+        print("DEAD :( ")
+        exit()
+
+def get_map(debug = 0):
     # ox, oy = pos_origin()
     ox_ = ox - 16; 
     oy_ = oy - 16; 
 
-    pgui.screenshot('img/src.png', region=(ox_,oy_,SIZE * div,SIZE * div))
+    pgui.screenshot('img/src.png', region=(ox_, oy_, 
+                                           SIZE_W * div, SIZE_H * div))
     im = Image.open('img/src.png').convert('RGB')
 
-    res = [[0 for _ in range(SIZE)]for _ in range(SIZE)]
-    for i in range(SIZE):
-        for j in range(SIZE):
+    res = [[0 for _ in range(SIZE_W)] for _ in range(SIZE_H)]
+    for i in range(SIZE_H):
+        for j in range(SIZE_W):
             lx, ty = j * div, i * div
             im_crop = im.crop((lx, ty, lx + div, ty + div))
-            
-            res[i][j] = cell(im_crop.getpixel((15, 17)))
+            res[i][j] = cell(im_crop.getpixel((16, 16)))
+    if debug:
+        for i in res:
+            for p in i:
+                if p == -1:
+                    print(" ", end = "")
+                else:
+                    print(p, end = "")
+            print()
     return res
 
