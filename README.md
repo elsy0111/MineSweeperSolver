@@ -27,17 +27,18 @@ Setting:
 ### 盤面の取得  
 まずは表示されている盤面をとらなければなりません。  
 そのために、ウィンドウのある座標を基準として座標をとる必要があります。  
-今回は上部中央に表示されている黄色いにこちゃんマークの座標を取得し、そこから基準をとります。
-
+~~今回は上部中央に表示されている黄色いにこちゃんマークの座標を取得し、そこから基準をとります。~~  
+('23/11/09 12:52) 左上の ![lc](https://github.com/elsy0111/MineSweeperSolver/blob/master/img/corner.png) から座標をとるようにしました
 
 ```python
-image_path = 'img/face.png'
+image_path = 'img/corner.png'
 
 def pos_origin():
     location = pgui.locateOnScreen(image_path)
     if location:
         cx, cy = location[0], location[1]
-        ox, oy = cx - 458, cy + 125
+        ox, oy = cx + div * 2 - 4, cy + div * 2 - 6 
+        pgui.moveTo(ox, oy)
     else:
         ox = oy = -1
     return (ox, oy)
