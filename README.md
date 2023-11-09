@@ -11,7 +11,7 @@ from PIL import Image
 ```
 Setting:  
 ![Setting](https://github.com/elsy0111/MineSweeperSolver/blob/master/img/number(Not_Using)/to_readme_setting.png)  
-私は画面が QHD(2560 x 1440 px) の環境で行っていますので、動かしたい場合は `img/face.png` を撮り直して `lib > div = 32` を変更するといいと思います。(この32は各マス間の距離なので H,W のマスの個数の32とは関係ありません)
+私は画面が QHD(2560 x 1440 px) の環境で行っていますので、動かしたい場合は `img/corner.png` を撮り直して `lib > div = 32` を変更するといいと思います。(この32は各マス間の距離なので H,W のマスの個数の32とは関係ありません)
 
 ## Run
 ```shell
@@ -72,13 +72,15 @@ def cell(v):
 
 ### solver  
 ソルバですが、非常にシンプルなものです。  
-現在の盤面を `v`, 旗の有無を `f` とするとき、全てのマスに対して以下の操作を行います。  
+現在の盤面を `v`, 旗の有無を `f` とするとき、空いているマスを根としてBFSを行います。  
 ```python
-while 1: for i in H: for j in W:
-    IF v[i][j] == 数字:
-        IF 周り8方向の壁の個数 == v[i][j]:
-            f[周り8方向の壁の座標] = True
-        ELSE IF 周り8方向の旗の個数 == v[i][j]:
-            dig(旗が立っていない座標)
+while 1:
+    BFS:
+        IF v[i][j] == 数字:
+            IF 周り8方向の壁の個数 == v[i][j]:
+                f[周り8方向の壁の座標] = True
+            ELSE IF 周り8方向の旗の個数 == v[i][j]:
+                dig(旗が立っていない座標)
 ```
+
 あとは `click(i, j)` 関数とかを作っておけばすぐに作れるでしょう。
