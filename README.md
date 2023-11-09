@@ -1,6 +1,8 @@
 # MineSweeperSolver  
 ![OGP](https://github.com/elsy0111/MineSweeperSolver/blob/master/img/number(Not_Using)/MineSweeperSolver.png)  
 
+![GIF](https://github.com/elsy0111/MineSweeperSolver/blob/master/img/number(Not_Using)/sub.gif)
+
 ## Require
 使用させていただいたマインスイーパー : [Total Minesweeper](https://www.microsoft.com/store/productId/9P9W03N34992?ocid=pdpshare "from MS Store")
 ```python
