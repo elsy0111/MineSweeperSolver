@@ -1,15 +1,16 @@
 import pyautogui as pgui
 from PIL import Image
 
-image_path = 'img/face.png'
+image_path = 'img/corner.png'
 div = 32
-
+SIZE = 39
 
 def pos_origin():
     location = pgui.locateOnScreen(image_path)
     if location:
         cx, cy = location[0], location[1]
-        ox, oy = cx - 458, cy + 125
+        ox, oy = cx + div * 2 - 4, cy + div * 2 - 6 
+        pgui.moveTo(ox, oy)
     else:
         ox = oy = -1
     return (ox, oy)
@@ -54,12 +55,12 @@ def get_map():
     ox_ = ox - 16; 
     oy_ = oy - 16; 
 
-    pgui.screenshot('img/src.png', region=(ox_,oy_,32 * div,32 * div))
+    pgui.screenshot('img/src.png', region=(ox_,oy_,SIZE * div,SIZE * div))
     im = Image.open('img/src.png').convert('RGB')
 
-    res = [[0 for _ in range(32)]for _ in range(32)]
-    for i in range(32):
-        for j in range(32):
+    res = [[0 for _ in range(SIZE)]for _ in range(SIZE)]
+    for i in range(SIZE):
+        for j in range(SIZE):
             lx, ty = j * div, i * div
             im_crop = im.crop((lx, ty, lx + div, ty + div))
             

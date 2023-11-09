@@ -1,7 +1,9 @@
 import lib
 
+SIZE = 39
+
 def in_board(i, j):
-    return (0 <= i < 32 and 0 <= j < 32)
+    return (0 <= i < SIZE and 0 <= j < SIZE)
 
 d = [
      (-1, -1), 
@@ -33,9 +35,9 @@ def around(i, j, v, f):
 
 def solve(v, f):
     while(1):
-        for i in range(32):
+        for i in range(SIZE):
             v = lib.get_map()
-            for j in range(32):
+            for j in range(SIZE):
                 # print(i, j)
                 if v[i][j] == 9:
                     f[i][j] = 1
