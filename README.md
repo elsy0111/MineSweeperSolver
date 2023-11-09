@@ -19,7 +19,7 @@ from PIL import Image
 
 プレイ画面:
 
-![Screen](https://github.com/elsy0111/MineSweeperSolver/blob/master/img/src.png)
+![Screen](https://github.com/elsy0111/MineSweeperSolver/blob/master/img/number(Not_Using)/to_readme.png)
 
 まずは表示されている盤面をとらなければなりません。
 そのために、ウィンドウのある座標を基準として座標をとる必要があります。
