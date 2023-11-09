@@ -23,7 +23,7 @@ Setting:
 ```
 
 ## Description
-プレイ画面:  
+画面:  
 ![Screen](https://github.com/elsy0111/MineSweeperSolver/blob/master/img/number(Not_Using)/to_readme.png)
 
 ### 盤面の取得  
@@ -74,7 +74,7 @@ def cell(v):
 
 ### solver  
 ソルバですが、非常にシンプルなものです。  
-現在の盤面を `v`, 旗の有無を `f` とするとき、空いているマスを根としてBFSを行います。  
+現在の盤面を `v`, 旗の有無を `f` とするとき、(初期の)空いているマスを根としてBFSを行います。  
 ```python
 while 1:
     BFS:
