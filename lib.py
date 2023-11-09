@@ -26,7 +26,6 @@ def click(j, i, left = 1):
         else:
             print("flag :", i, j)
             pgui.rightClick()
-            # pgui.click(ox + i * div, oy + j * div, clicks=1, interval=0.1, button='right')
     else:
         print("Window Not Found(on click)")
 
@@ -54,14 +53,13 @@ def get_map():
     # ox, oy = pos_origin()
     ox_ = ox - 16; 
     oy_ = oy - 16; 
-    # pgui.moveTo(ox + 32 * div + 2, oy + 32 * div + 2, duration=1)
+
     pgui.screenshot('img/src.png', region=(ox_,oy_,32 * div,32 * div))
     im = Image.open('img/src.png').convert('RGB')
 
     res = [[0 for _ in range(32)]for _ in range(32)]
     for i in range(32):
         for j in range(32):
-            lx, ty = ox_ + j * div, oy_ + i * div 
             lx, ty = j * div, i * div
             im_crop = im.crop((lx, ty, lx + div, ty + div))
             
