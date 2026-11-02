@@ -6,7 +6,7 @@ from pynput.mouse import Controller, Button
 image_path = 'img/corner.png'
 div = 32
 SIZE_W = 48
-SIZE_H = 39
+SIZE_H = 40
 
 mouse = Controller()
 
@@ -26,9 +26,9 @@ def click(j, i, left = 1):
         print("dig  :", i, j)
         # pgui.click(ox + i * div, oy + j * div)
         mouse.position = (ox + i * div, oy + j * div)
-        sleep(.02)
+        # sleep(.01)
         mouse.click(Button.left, 1)
-        sleep(.02)
+        sleep(.018)
     else:
         print("flag :", i, j)
         # pgui.click(ox + i * div, oy + j * div, button="right")

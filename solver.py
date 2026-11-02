@@ -2,7 +2,7 @@ import lib
 from collections import deque
 
 SIZE_W = 48
-SIZE_H = 39
+SIZE_H = 40
 
 def in_board(i, j):
     return (0 <= i < SIZE_H and 0 <= j < SIZE_W)
